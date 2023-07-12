@@ -4,18 +4,19 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li v-if="step ==1" @click="step++">Next</li>
+      <li v-if="step ==2" @click="publish">Publish</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :게시물="게시물" :step="step"/>
+  <Container :이미지="이미지" :게시물="게시물" :step="step"/>
 <button @click="more" >더보기</button>
 
 
   <div class="footer">
     <ul class="footer-button-plus">
-      <input type="file" id="file" class="inputfile" />
+      <input @change="upload" accept="image/*" type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
  </div>
@@ -32,6 +33,17 @@
 </template>
 
 <script>
+//7월12일 글 발행기능 만들기 
+//내 질문: 저번 시간 숙제 app.vue에서 사진등록해서 container.vue로 옮기는 걸 어쩌라는 건지 props도 못쓰는데
+//내 질문이 맞음 함수에서 쓴 변수를 옮긴적이 없음 =>data 에서 이미지:'' 함수에서  this.이미지 = url; 이렇게 하면 들어감
+
+
+//7월11일 서버없이 업로드한 이미지 다루기 (잡기술)
+//이미지 업로드한걸 HTML에 보여주려면? 1)FileReader() 2)좀더 가벼움 => URL.createObjectURL()
+//change="upload" multiple => 다양한 이미지 업로드 가능 accept="image/*" 
+
+
+
 //7월10일-2 tab만들기 
 //동적 UI 만드는 법 1)UI 현재 상태를 데이터로 만들기 2)상태에 따라 HTML이 어떻게 보일지 
 //data에 변수 만들기 step:0 v-if="step==0" 아래처럼 하면 됨 
@@ -117,6 +129,7 @@ export default {
       step:0,
       게시물: postdata,
       클릭수: 0, 
+      이미지:'',
     }
   },
 
@@ -124,6 +137,20 @@ export default {
     Container,
   },
   methods : {
+    publish(){
+      var 내게시물 ={
+        name: "Kim Hyun",
+        userImage: "https://picsum.photos/100?random=3",
+        postImage: this.이미지,
+        likes: 36,
+        date: "May 15",
+        liked: false,
+        content: "오늘 무엇을 했냐면요 아무것도 안했어요 ?",
+        filter: "perpetua"
+      };
+      this.게시물.unshift(내게시물)
+      this.step=0;
+    },
     
     more(){
       this.클릭수++; 
@@ -144,9 +171,19 @@ export default {
     }else if(this.클릭수 > 3){
    
       alert('더 이상 가져올 자료가 없습니다.')
-
- }
     }
+    },
+
+    upload(e){
+      let 파일 = e.target.files; 
+      
+      let url = URL.createObjectURL(파일[0])
+      console.log(url)
+      this.이미지 = url;
+      this.step++;
+    }
+  
+
 
   },
   

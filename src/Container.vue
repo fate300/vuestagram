@@ -5,7 +5,7 @@
    </div>
   
    <div v-if="step == 1">
-   <div class="upload-image" ></div>
+   <div class="upload-image" :style="`background-image: url(${이미지})`"></div>
   <div class="filters">
     <div class="filter-1"></div>
     <div class="filter-1"></div>
@@ -15,7 +15,7 @@
   </div>
 </div>
 <div v-if="step == 2">
-  <div class="upload-image"></div>
+  <div class="upload-image" :style="`background-image: url(${이미지})`"></div>
   <div class="write" v-if="step == 2">
     <textarea class="write-box">write!</textarea>
   </div>
@@ -34,7 +34,8 @@ components: {
   },
 props: {
    게시물: Object,
-   step: Number
+   step: Number,
+   이미지: String, 
    }
 }
 </script>
