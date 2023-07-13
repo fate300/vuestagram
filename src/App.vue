@@ -10,7 +10,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <Container :이미지="이미지" :게시물="게시물" :step="step"/>
+  <Container @write="작성글=$event" :이미지="이미지" :게시물="게시물" :step="step"/>
 <button @click="more" >더보기</button>
 
 
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+//7월13일 업로드한 이미지 인스타그램 필터 기능 만들기 (잡기술)
+
 //7월12일 글 발행기능 만들기 
 //내 질문: 저번 시간 숙제 app.vue에서 사진등록해서 container.vue로 옮기는 걸 어쩌라는 건지 props도 못쓰는데
 //내 질문이 맞음 함수에서 쓴 변수를 옮긴적이 없음 =>data 에서 이미지:'' 함수에서  this.이미지 = url; 이렇게 하면 들어감
@@ -130,6 +132,7 @@ export default {
       게시물: postdata,
       클릭수: 0, 
       이미지:'',
+      작성글:' ',
     }
   },
 
@@ -145,7 +148,7 @@ export default {
         likes: 36,
         date: "May 15",
         liked: false,
-        content: "오늘 무엇을 했냐면요 아무것도 안했어요 ?",
+        content: this.작성글,
         filter: "perpetua"
       };
       this.게시물.unshift(내게시물)
