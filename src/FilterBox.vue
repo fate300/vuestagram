@@ -1,7 +1,13 @@
 <template>
-  <div class="filter-item" v-for="a in 필터들" :key="a" :class="['filter-item', a]" :style="`background-image:url(${이미지})`"></div> 
-</template>
+  <div :class="필터+ ' filter-item'" :style="`background-image:url(${이미지})`">
+  
+  <slot :msg="msg"></slot>
+  
+  </div> 
 
+
+
+</template>
 <script>
 
 
@@ -9,9 +15,14 @@
 
 export default {
     name:'FilterBox-page',
+    data(){
+     return{
+        msg:'hello',
+      }
+    },
     props: {
         이미지 : String, 
-        필터들: Array, 
+        필터: String, 
     }
 }
 </script>

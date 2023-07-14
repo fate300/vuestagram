@@ -33,6 +33,22 @@
 </template>
 
 <script>
+//7월14일 숙제 부모에게서 자식으로 보내는 props 보다 더 쉬운 slot
+//gpt가 만든 것  <div class="filter-item" v-for="a in 필터들" :key="a" :class="['filter-item', a]" :style="`background-image:url(${이미지})`"></div> 
+//강사가 만든 것 
+// container에서 필터들이 아니라 반복문 값인 a를 필터로 바꿔서 가져옴 <div :class="필터+ ' filter-item'" :style="`background-image:url(${이미지})`"></div> 
+//class 앞에 :(콜론)찍으면 데이터 바인딩 됨 
+//또 다른 class를 만들어서 해도 된다고 함 
+//<div :class="필터" class="filter-item"~~~>
+//1.자식에게 구멍뚫기 <slot></slot>
+//2.부모의 <component>{{반복문 값도 감 (필터)}} </component>를 벌려서 안에 넣으면 slot에게 뿅감
+//슬롯을 여러개 써야 할때  자식 자리에 <slot name="a"></slot> <slot name="b"></slot>
+//부모자리에 <template v-slot:a> </template>
+//slot 사용할때 부모가 자식데이터 필요한 경우 
+// 자식 데이타에서 <slot :msg="msg"></slot>
+// <!-- <template v-slot:default="작명">{{ 작명.msg }}</template> -->
+
+
 //7월13일 업로드한 이미지 인스타그램 필터 기능 만들기 (잡기술)
 
 //7월12일 글 발행기능 만들기 
