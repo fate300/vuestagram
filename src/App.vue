@@ -33,6 +33,21 @@
 </template>
 
 <script>
+//7월15일  멀리 있는 컴포넌트간 데이터전송할 땐 mitt(라이브러리 설치) =>상위 상위 컴포넌트로 전달(custom event 말고)
+//main.js에 아래 입력 => 자주 쓰는 라이브러리 main.js에 등록   
+// import mitt from 'mitt'
+// let emitter = mitt();
+// let app = createApp(App)
+// app.config.globalProperties.emitter = emitter; 
+//app.mount('#app')
+
+// 발사할 곳에서 this.emitter.emit()으로 발사하고 2. 받을 곳에서 this.emitter.on()으로 수신
+//힌트 필터 먹일 곳에서 :class="게시물.filter"이러면 먹힘 
+
+
+
+
+
 //7월14일 숙제 부모에게서 자식으로 보내는 props 보다 더 쉬운 slot
 //gpt가 만든 것  <div class="filter-item" v-for="a in 필터들" :key="a" :class="['filter-item', a]" :style="`background-image:url(${이미지})`"></div> 
 //강사가 만든 것 
@@ -150,6 +165,12 @@ export default {
       이미지:'',
       작성글:' ',
     }
+  },
+  mounted(){
+    this.emitter.on('작명', ()=>{
+
+
+    });
   },
 
   components: {
