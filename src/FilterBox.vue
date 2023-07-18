@@ -1,7 +1,7 @@
 <template>
-  <div :class="필터+ ' filter-item'" :style="`background-image:url(${이미지})`">
+  <div @click="fire" :class="필터+ ' filter-item'" :style="`background-image:url(${이미지})`">
   
-  <slot :msg="msg"></slot>
+  <slot></slot>
   
   </div> 
 
@@ -15,6 +15,13 @@
 
 export default {
     name:'FilterBox-page',
+    methods:{
+      fire(){
+        this.emitter.emit('박스클릭함',this.필터)
+
+      }
+
+    },
     data(){
      return{
         msg:'hello',

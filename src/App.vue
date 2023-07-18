@@ -10,6 +10,9 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  <h4>안녕{{ $store.state.name }}</h4>
+<!-- 아래처럼 코드 짜면 안됨 여기서 바로 수정하면 나중에 어디서 수정했는지 못 찾음 -->
+  <!-- <button @click="$store.state.name = '박'">버튼</button> -->
   <Container @write="작성글=$event" :이미지="이미지" :게시물="게시물" :step="step"/>
 <button @click="more" >더보기</button>
 
@@ -33,6 +36,13 @@
 </template>
 
 <script>
+//7월18일 Vuex 1
+//모든 컴포넌트들이 데이터를 공유할 수 있는 js파일 
+//Vuex 설치 => npm install vuex@next
+//컴포넌트 안에서 직접 수정하기 금지 
+//store.js에 수정방법을 정의해두고 그 방법을 컴포넌트에서 소환해서 수정해야함 
+//
+
 //7월15일  멀리 있는 컴포넌트간 데이터전송할 땐 mitt(라이브러리 설치) =>상위 상위 컴포넌트로 전달(custom event 말고)
 //main.js에 아래 입력 => 자주 쓰는 라이브러리 main.js에 등록   
 // import mitt from 'mitt'
@@ -156,6 +166,7 @@ import axios from 'axios'
 
 
 export default {
+
   name: 'App',
   data(){
     return{
@@ -164,13 +175,13 @@ export default {
       클릭수: 0, 
       이미지:'',
       작성글:' ',
+      선택한필터:'',
     }
   },
   mounted(){
-    this.emitter.on('작명', ()=>{
-
-
-    });
+    this.emitter.on('박스클릭함', (a)=>{
+    this.선택한필터 = a
+  })
   },
 
   components: {
@@ -186,7 +197,7 @@ export default {
         date: "May 15",
         liked: false,
         content: this.작성글,
-        filter: "perpetua"
+        filter: this.선택한필터,
       };
       this.게시물.unshift(내게시물)
       this.step=0;
