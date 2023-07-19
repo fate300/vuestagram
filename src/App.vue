@@ -10,7 +10,12 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <h4>안녕{{ $store.state.name }}</h4>
+  <h4>안녕 {{ $store.state.name }}</h4>
+  <!-- store.js에 바꾸라고 부탁하는 방식  -->
+  <button @click="$store.commit('이름변경')"> 버튼 </button>
+  <p>{{ $store.state.age }}</p>
+  <button @click="$store.commit('나이변경',10)"> 버튼 </button>
+
 <!-- 아래처럼 코드 짜면 안됨 여기서 바로 수정하면 나중에 어디서 수정했는지 못 찾음 -->
   <!-- <button @click="$store.state.name = '박'">버튼</button> -->
   <Container @write="작성글=$event" :이미지="이미지" :게시물="게시물" :step="step"/>
@@ -36,12 +41,23 @@
 </template>
 
 <script>
+//7월19일 Vuex 2 : store에 있는 state 데이터 바꾸는 법
+//불러올때는 $store.state.name 이런 식으로 불러와야 함 
+//store.js에 바꾸라고 부탁하는 방식이어야 함 
+//1. store.js에 state 수정방법 정의해야함 
+//2.바꿀곳에서 store.js에 부탁 해야함 =>  @click="$store.commit('이름변경')" 이런식으로 
+//데이타도 보낼 수 있음 보낼 곳 에서 => <button @click="$store.commit('나이변경',10)"> 버튼 </button>
+//나이변경(state,date){state.age += data} data는 넘겨받은 값을 말함 그만큼씩 증가함 
+
+
+
 //7월18일 Vuex 1
 //모든 컴포넌트들이 데이터를 공유할 수 있는 js파일 
 //Vuex 설치 => npm install vuex@next
 //컴포넌트 안에서 직접 수정하기 금지 
 //store.js에 수정방법을 정의해두고 그 방법을 컴포넌트에서 소환해서 수정해야함 
-//
+//불러올때는 $store.state.name 이런 식으로 불러와야 함 
+
 
 //7월15일  멀리 있는 컴포넌트간 데이터전송할 땐 mitt(라이브러리 설치) =>상위 상위 컴포넌트로 전달(custom event 말고)
 //main.js에 아래 입력 => 자주 쓰는 라이브러리 main.js에 등록   
@@ -193,7 +209,7 @@ export default {
         name: "Kim Hyun",
         userImage: "https://picsum.photos/100?random=3",
         postImage: this.이미지,
-        likes: 36,
+        likes: this.좋아요,
         date: "May 15",
         liked: false,
         content: this.작성글,
@@ -202,7 +218,12 @@ export default {
       this.게시물.unshift(내게시물)
       this.step=0;
     },
-    
+    computed: {
+    좋아요() {
+      return this.$store.state.likes;
+    }
+  },
+
     more(){
       this.클릭수++; 
 
@@ -233,7 +254,7 @@ export default {
       this.이미지 = url;
       this.step++;
     }
-  
+    
 
 
   },
