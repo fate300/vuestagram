@@ -41,6 +41,10 @@
 </template>
 
 <script>
+//7월20일 Vuex homework 
+//
+
+
 //7월19일 Vuex 2 : store에 있는 state 데이터 바꾸는 법
 //불러올때는 $store.state.name 이런 식으로 불러와야 함 
 //store.js에 바꾸라고 부탁하는 방식이어야 함 
@@ -209,7 +213,7 @@ export default {
         name: "Kim Hyun",
         userImage: "https://picsum.photos/100?random=3",
         postImage: this.이미지,
-        likes: this.좋아요,
+        likes: 19,
         date: "May 15",
         liked: false,
         content: this.작성글,
@@ -218,11 +222,7 @@ export default {
       this.게시물.unshift(내게시물)
       this.step=0;
     },
-    computed: {
-    좋아요() {
-      return this.$store.state.likes;
-    }
-  },
+    
 
     more(){
       this.클릭수++; 

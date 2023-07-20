@@ -5,7 +5,8 @@ const store = createStore({
         return{
             name:'kim',
             age: 20, 
-            likes: 30, 
+            likes: [30,40,50],
+            좋아요눌렀니:false,  
         }
 
     },
@@ -16,9 +17,16 @@ const store = createStore({
         나이변경(state){
             state.age +=1
         },
-        좋아요변경(state){
-            state.likes +=1
-        }
+        좋아요(state){
+            if(state.좋아요눌렀니 == false){
+         state.likes +=1
+         state.좋아요눌렀니 = true; 
+            }else{
+        state.likes -=1
+        state.좋아요눌렀니 = false; 
+            }
+           
+        },
     
     }
 })
