@@ -15,6 +15,8 @@
   <button @click="$store.commit('이름변경')"> 버튼 </button>
   <p>{{ $store.state.age }}</p>
   <button @click="$store.commit('나이변경',10)"> 버튼 </button>
+  <p>{{ $store.state.more }}</p>
+  <button @click="$store.dispatch('getData')">더보기버튼</button>
 
 <!-- 아래처럼 코드 짜면 안됨 여기서 바로 수정하면 나중에 어디서 수정했는지 못 찾음 -->
   <!-- <button @click="$store.state.name = '박'">버튼</button> -->
@@ -41,6 +43,14 @@
 </template>
 
 <script>
+
+//  Vuex 3 : actions 항목을 알아보자
+//ajax하는 곳 or 오래걸리는 작업들 => 순차적인 작업이 필요할 경우 actions 
+//actions 함수를 불러오는 방법 =>@click="$store.dispatch('getData')">
+//1. 더보기 누르면 dispatch("getData")
+//2. 그럼 ajax로 데어터 가져오는데 
+//3.mutations를 이용해서 state에 저장 
+
 //7월20일 Vuex homework 
 //
 
