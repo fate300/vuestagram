@@ -9,12 +9,13 @@
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
-
+<p>{{ name }}  {{ likes }}  {{ age }}</p>
   <h4>안녕 {{ $store.state.name }}</h4>
   <!-- store.js에 바꾸라고 부탁하는 방식  -->
   <button @click="$store.commit('이름변경')"> 버튼 </button>
   <p>{{ $store.state.age }}</p>
-  <button @click="$store.commit('나이변경',10)"> 버튼 </button>
+
+  <button @click="나이변경(10)"> 버튼 </button>
   <p>{{ $store.state.more }}</p>
   <button @click="$store.dispatch('getData')">더보기버튼</button>
 
@@ -23,6 +24,8 @@
   <Container @write="작성글=$event" :이미지="이미지" :게시물="게시물" :step="step"/>
 <button @click="more" >더보기</button>
 
+<!-- <p>{{ now2}}{{카운터 }}</p>
+<button @click="카운터++">버튼</button> -->
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -44,7 +47,28 @@
 
 <script>
 
-//  Vuex 3 : actions 항목을 알아보자
+// 7월24일 Vuex 4 : mapState를 사용하면 편리할 수도 있음
+//methods 함수는 사용할 때마다 실행됨, 
+//computed 함수는 사용해도 실행되지 않음, 처음 실행하고 값을 간직함 => 계산결과저자용 함수들임 
+//computed 함수는 이렇게 써야함 => {{now2}}
+//computed는 데이터 결과 저장소 이안에 mapState 쓰면 됨 이런식으로 등록하고 바로 쓰면됨 
+// computed: {
+//       name(){
+//         return this.$store.state.name
+//       }
+//      ...mapState([]),
+//   },
+//computed 함수는 항상 return을 써야함 
+// ...mapState([]) 쓰려면 import 해야함 
+//...mapState(['name','age','likes']) => 이런식으로 store에 있는거 가져와서 쓰면 됨 
+//이렇게 임포트함 => import { mapState } from 'vuex'
+//가져다 쓰면서 이름 짓고 싶을때 오브젝트 자료 다음처럼 => ...mapState({작명:'name',})
+
+
+
+
+
+// 7월21일 Vuex 3 : actions 항목을 알아보자
 //ajax하는 곳 or 오래걸리는 작업들 => 순차적인 작업이 필요할 경우 actions 
 //actions 함수를 불러오는 방법 =>@click="$store.dispatch('getData')">
 //1. 더보기 누르면 dispatch("getData")
@@ -193,6 +217,7 @@
 import Container from './Container.vue'
 import postdata from './postdata.js'
 import axios from 'axios'
+import { mapMutations, mapState } from 'vuex'
 
 
 export default {
@@ -206,6 +231,7 @@ export default {
       이미지:'',
       작성글:' ',
       선택한필터:'',
+      카운터:0,
     }
   },
   mounted(){
@@ -217,7 +243,24 @@ export default {
   components: {
     Container,
   },
+
+  computed: {
+    // now2(){
+    //   return new Date()
+    // },
+      name(){
+        return this.$store.state.name
+
+      },
+      ...mapState(['name','age','likes'])
+
+  },
   methods : {
+    ...mapMutations(['setMore','좋아요','나이변경']),
+
+    // now(){
+    //   return new Date()
+    // },
     publish(){
       var 내게시물 ={
         name: "Kim Hyun",
