@@ -47,6 +47,20 @@
 
 <script>
 
+//7월26일 Composition API 
+//관련된 코드들을 찢어놓지 않고 개발하는 법: Composition API 
+//setup(){}안에서 데이터, methods, computed, watch만들 수 있고 hook도 걸 수 있음 
+
+
+
+
+
+//7월25일 웹을 앱처럼 쓰기 
+//1) manifest.json 2) service-worker.js 두가지 필요
+//터미널에서 vue add pwa 라고 치면 됨 
+//npm run build 하면 dist 폴더에 (위에 두개 다 설치됨)
+//play store 등록가능한 실제 apk파일(검색해야함)
+
 // 7월24일 Vuex 4 : mapState를 사용하면 편리할 수도 있음
 //methods 함수는 사용할 때마다 실행됨, 
 //computed 함수는 사용해도 실행되지 않음, 처음 실행하고 값을 간직함 => 계산결과저자용 함수들임 
@@ -225,7 +239,7 @@ export default {
   name: 'App',
   data(){
     return{
-      step:0,
+      step:3,
       게시물: postdata,
       클릭수: 0, 
       이미지:'',
