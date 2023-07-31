@@ -46,6 +46,9 @@
 </template>
 
 <script>
+//7월31일 
+//이미지 데이터 바인딩 :style="{'background-image': `url(${a.image})`}"
+
 
 //7월26일 Composition API 
 //관련된 코드들을 찢어놓지 않고 개발하는 법: Composition API 

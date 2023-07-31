@@ -3,9 +3,9 @@
   <div style="padding : 10px">
   <h4>팔로워</h4>
   <input placeholder="?" />
-  <div class="post-header">
-    <div class="profile"></div>
-    <span class="profile-name">{{ follower }}</span>
+  <div class="post-header" v-for="(a,i) in follower" :key="i">
+    <div class="profile" :style="{'background-image': `url(${a.image})`}"></div>
+    <span class="profile-name">{{ a.name }}</span>
   </div>
 </div>
 
@@ -18,8 +18,11 @@ import axios from 'axios';
 
 export default {
     name:'MyPage-page',
+  
     setup(){
         let follower = ref([]);
+        // let {one, two} = toRefs(props);
+        
         axios.get('/follower.json').then((a)=>{
            follower.value = a.data
 
